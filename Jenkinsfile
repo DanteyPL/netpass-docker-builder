@@ -9,13 +9,10 @@ pipeline {
         version = ''
         requiresBuilding = true
     )
-    parameters {
-
-    }
     stages{
         stage('Check if latest image is built') {
             steps {
-                echo Checking latest version
+                echo 'Checking latest version'
                 sh'''
                 $(head -n 2 Dockerfile | tail -n 1 | cut -d' ' -f 2) # retrieving version variable from Dockerfile
                 for tag in $(docker images netpass_builder | sed -Ee 's/ +/ /gm' | cut -d' ' -f 2 | tail -n +2)
