@@ -4,7 +4,7 @@ pipeline {
     }
     environment {
         forcePrune = false
-        version = """${sh( returnStdout: true, script: '''grep version Dockerfile | cut -d'"' -f2'''}) """
+        version = """${sh( returnStdout: true, script: '''grep version Dockerfile | cut -d'"' -f2''')} """
         requiresBuilding = true
     }
     stages {
