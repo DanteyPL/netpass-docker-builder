@@ -13,8 +13,8 @@ pipeline {
                         echo -n false
                         exit 0
                     fi
-                    echo -n true
-                done 
+                done
+                echo -n true
                 ''').trim()}"""
     }
     stages {
