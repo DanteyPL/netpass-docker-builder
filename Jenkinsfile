@@ -5,7 +5,7 @@ pipeline {
     environment {
         forcePrune = false
         version = """${sh( returnStdout: true, script: "grep version Dockerfile | cut -d'\"' -f2 | tr -d '\\n' ")}"""
-        requiresBuilding = ""
+        // requiresBuilding = ""
     }
     stages {
         stage('Check if latest image is built') {
