@@ -21,7 +21,7 @@ pipeline {
                 done
                 export requiresBuilding_local=true
                 '''
-                script{ env.requiresBuilding = $requiresBuilding_local }
+                script{ env.requiresBuilding = ${requiresBuilding_local} }
                 echo "Version: ${version}"
                 echo "Requires Building: ${requiresBuilding}"
             }
