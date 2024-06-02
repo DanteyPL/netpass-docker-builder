@@ -11,19 +11,16 @@ pipeline {
         stage('Check if latest image is built') {
             steps {
                 echo 'Checking latest version'
-                sh '''
+                script{ env.requiresBuilding = sh( returnStdout: true, script: '''
                 for tag in $(docker images netpass_builder | sed -Ee 's/ +/ /gm' | cut -d" " -f 2 | tail -n +2)
                 do
                     if [ "$tag" = "${version}" ]; then
-                        export requiresBuilding_local=false
-                        break
-                    else
-                        export requiresBuilding_local=true
+                        echo false
+                        exit 0
                     fi
+                    echo true
                 done
-                
-                '''
-                script{ env.requiresBuilding = sh(returnStdout: true, script: 'echo ${requiresBuilding_local}').trim() }
+                ''').trim()}
                 echo "Version: ${version}"
                 echo "Requires Building: ${requiresBuilding}"
             }
