@@ -22,7 +22,7 @@ pipeline {
                 done
                 ''').trim()}
                 echo "Version: ${version}"
-                echo "Requires Building: ${env.requiresBuilding}"
+                echo "Requires Building: $env.requiresBuilding"
             }
         }
         stage('Build docker image') {
