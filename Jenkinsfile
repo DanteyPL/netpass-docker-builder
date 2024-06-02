@@ -1,8 +1,6 @@
 pipeline {
     agent {
-        node {
-            label 'mikrus'
-        }
+        label 'mikrus'
     }
     environment (
         forcePrune = false
