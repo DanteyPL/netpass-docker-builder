@@ -24,6 +24,12 @@ pipeline {
                 echo "Requires Building: ${requiresBuilding}"
             }
         }
+        stage('Build docker image') {
+            when { expression { return requiresBuilding } }
+            steps {
+                echo 'Yes'
+            }
+        }
     }
     post {
         cleanup {
