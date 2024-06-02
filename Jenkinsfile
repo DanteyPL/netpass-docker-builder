@@ -25,7 +25,7 @@ pipeline {
             }
         }
         stage('Build docker image') {
-            when { expression { return requiresBuilding } }
+            when { expression { return ${requiresBuilding} } }
             steps {
                 sh 'docker build -t netpass_builder:${version} -f ./Dockerfile ./'
             }
