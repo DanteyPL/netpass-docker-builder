@@ -20,8 +20,8 @@ pipeline {
                         break
                     fi
                 done
-                echo "Version: $version"
                 '''
+                echo "Version: $version"
                 echo "Requires Building: ${requiresBuilding}"
             }
         }
