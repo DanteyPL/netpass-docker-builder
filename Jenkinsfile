@@ -7,9 +7,6 @@ pipeline {
         version = ''
         requiresBuilding = true
     )
-    parameters {
-
-    }
     stages{
         stage('Check if latest image is built') {
             steps {
