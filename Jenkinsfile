@@ -4,14 +4,13 @@ pipeline {
     }
     environment {
         forcePrune = false
-        version = ''
+        version = """${sh '''grep version Dockerfile | cut -d'"' -f2'''} """
         requiresBuilding = true
     }
     stages {
         stage('Check if latest image is built') {
             steps {
                 echo 'Checking latest version'
-                sh '''eval $(head -n 2 Dockerfile | tail -n 1 | cut -d' ' -f 2)''' // retrieving version variable from Dockerfile
                 sh '''
                 for tag in $(docker images netpass_builder | sed -Ee 's/ +/ /gm' | cut -d" " -f 2 | tail -n +2)
                 do
