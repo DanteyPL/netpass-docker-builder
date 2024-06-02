@@ -17,9 +17,11 @@ pipeline {
                     if [ "$tag" = "${version}" ]; then
                         export requiresBuilding_local=false
                         break
+                    else
+                        export requiresBuilding_local=true
                     fi
                 done
-                export requiresBuilding_local=true
+                
                 '''
                 script{ env.requiresBuilding = sh(returnStdout: true, script: 'echo ${requiresBuilding_local}').trim() }
                 echo "Version: ${version}"
