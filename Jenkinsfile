@@ -18,6 +18,12 @@ pipeline {
                 ''').trim()}"""
     }
     stages {
+        stage('Show variables') {
+            steps {
+                echo "Version: ${version}"
+                echo "Requires Building: ${requiresBuilding}"
+            }
+        }
         stage('Build docker image') {
             when { expression { return env.requiresBuilding }}
             steps {
