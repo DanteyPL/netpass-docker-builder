@@ -5,7 +5,7 @@ pipeline {
     environment {
         forcePrune = false
         version = """${sh( returnStdout: true, script: "grep version Dockerfile | cut -d'\"' -f2 | tr -d '\\n' ")}"""
-        requiresBuilding = true
+        requiresBuilding = "true"
     }
     stages {
         stage('Check if latest image is built') {
@@ -15,7 +15,7 @@ pipeline {
                 for tag in $(docker images netpass_builder | sed -Ee 's/ +/ /gm' | cut -d" " -f 2 | tail -n +2)
                 do
                     if [ "$tag" = "${version}" ]; then
-                        requiresBuilding = 1
+                        requiresBuilding = false
                         break
                     fi
                 done
@@ -25,7 +25,7 @@ pipeline {
             }
         }
         stage('Build docker image') {
-            when { expression { return ${requiresBuilding} } }
+            when { equals expected: "true", actual: env.requiresBuilding }
             steps {
                 sh 'docker build -t netpass_builder:${version} -f ./Dockerfile ./'
             }
