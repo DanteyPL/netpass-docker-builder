@@ -14,7 +14,7 @@ pipeline {
                 sh '''
                 for tag in $(docker images netpass_builder | sed -Ee 's/ +/ /gm' | cut -d" " -f 2 | tail -n +2)
                 do
-                    if [ "$tag" == "${env.version}" ]; then
+                    if [ "$tag" == "${version}" ]; then
                         requiresBuilding = false
                         break
                     fi
@@ -27,7 +27,7 @@ pipeline {
         stage('Build docker image') {
             when { expression { return requiresBuilding } }
             steps {
-                echo 'Yes'
+                sh 'docker build -t netpass_builder:${version} -f ./Dockerfile ./'
             }
         }
     }
