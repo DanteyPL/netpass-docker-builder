@@ -5,7 +5,7 @@ pipeline {
     environment {
         forcePrune = false
         version = """${sh( returnStdout: true, script: "grep version Dockerfile | cut -d'\"' -f2 | tr -d '\\n' ")}"""
-        requiresBuilding = """sh(returnStdout: true, script: '''
+        requiresBuilding = """${sh(returnStdout: true, script: '''
                 for tag in $(docker images netpass_builder | sed -Ee 's/ +/ /gm' | cut -d" " -f 2 | tail -n +2)
                 do
                     echo Found: "$tag"
@@ -15,7 +15,7 @@ pipeline {
                     fi
                     echo -n true
                 done
-                ''').trim()"""
+                ''').trim()}"""
     }
     stages {
         stage('Build docker image') {
