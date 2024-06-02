@@ -7,7 +7,7 @@ pipeline {
         version = ''
         requiresBuilding = true
     )
-    stages{
+    stages {
         stage('Check if latest image is built') {
             steps {
                 echo 'Checking latest version'
@@ -27,7 +27,7 @@ pipeline {
             }
         }
     }
-    post{
+    post {
         cleanup{
             cleanWs()
         }
