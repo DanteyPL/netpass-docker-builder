@@ -14,14 +14,14 @@ pipeline {
                         exit 0
                     fi
                     echo -n true
-                done
+                done 
                 ''').trim()}"""
     }
     stages {
         stage('Show variables') {
             steps {
-                echo "Version: ${version}"
-                echo "Requires Building: ${requiresBuilding}"
+                echo "Version: ${env.version}"
+                echo "Requires Building: ${env.requiresBuilding}"
             }
         }
         stage('Build docker image') {
