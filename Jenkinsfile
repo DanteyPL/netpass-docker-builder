@@ -15,7 +15,7 @@ pipeline {
                 for tag in $(docker images netpass_builder | sed -Ee 's/ +/ /gm' | cut -d" " -f 2 | tail -n +2)
                 do
                     if [ "$tag" = "${version}" ]; then
-                        requiresBuilding = false
+                        requiresBuilding = 1
                         break
                     fi
                 done
