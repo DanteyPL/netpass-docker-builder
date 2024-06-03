@@ -9,7 +9,10 @@ pipeline {
                 for tag in $(docker images netpass_builder | sed -Ee 's/ +/ /gm' | cut -d" " -f 2 | tail -n +2)
                 do
                     echo Found: "${tag}"
-
+                    if [ "${version}" = "${tag}" ]; then
+                        echo -n false
+                        exit 0
+                    fi
                 done
                 echo -n true
                 ''').trim()}"""
