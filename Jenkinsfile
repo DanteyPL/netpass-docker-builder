@@ -23,9 +23,9 @@ pipeline {
                     done
                     echo -n true
                     ''').trim()}"""
+                    echo "Requires Building: \${requiresBuilding}"
                 }
                 echo "Version: ${version}"
-                sh 'echo "Requires Building: \${requiresBuilding}"'
             }
         }
         stage('Build docker image') {
