@@ -10,6 +10,7 @@ pipeline {
     stages {
         stage('Check if latest docker image is build') {
             steps {
+                sh "echo ${version}"
                 script {
                     env.requiresBuilding = """${sh(returnStdout: true, script: '''
                     echo Latest installed version: ${version}
