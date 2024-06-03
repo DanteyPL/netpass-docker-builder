@@ -12,16 +12,15 @@ pipeline {
             steps {
                 script {
                     requiresBuilding = """${sh(returnStdout: true, script: '''
-                    echo Latest installed version: ${version}
                     for tag in $(docker images netpass_builder | sed -Ee 's/ +/ /gm' | cut -d" " -f 2 | tail -n +2)
                     do
                         echo Found: "${tag}"
                         if [ \$version = "${tag}" ]; then
-                            echo -n false
+                            echo false
                             exit 0
                         fi
                     done
-                    echo -n true
+                    echo true
                     ''').trim()}"""
                     echo "Requires Building: ${requiresBuilding}"
                 }
