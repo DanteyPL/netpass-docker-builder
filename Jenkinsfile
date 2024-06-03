@@ -21,13 +21,13 @@ pipeline {
                     done
                     echo true
                     ''').trim()}"""
-                    echo "Requires Building: ${requiresBuilding}"
                 }
                 echo "Version: ${version}"
+                echo "Requires Building: ${requiresBuilding}"
             }
         }
         stage('Build docker image') {
-            when { equals expected: true , actual: "${env.requiresBuilding}" }
+            when { equals expected: true , actual: "${requiresBuilding}" }
             steps {
                 sh 'docker build -t netpass_builder:${version} -t netpass_builder:latest -f ./Dockerfile ./'
             }
