@@ -11,7 +11,7 @@ pipeline {
         stage('Check if latest docker image is build') {
             steps {
                 script {
-                    env.requiresBuilding = """${sh(returnStdout: true, script: '''
+                    requiresBuilding = """${sh(returnStdout: true, script: '''
                     echo Latest installed version: ${version}
                     for tag in $(docker images netpass_builder | sed -Ee 's/ +/ /gm' | cut -d" " -f 2 | tail -n +2)
                     do
@@ -25,7 +25,7 @@ pipeline {
                     ''').trim()}"""
                 }
                 echo "Version: ${version}"
-                sh 'echo "Requires Building: ${requiresBuilding}"'
+                sh 'echo "Requires Building: ${env.requiresBuilding}"'
             }
         }
         stage('Build docker image') {
