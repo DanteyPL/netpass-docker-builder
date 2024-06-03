@@ -8,7 +8,7 @@ pipeline {
         requiresBuilding = """${sh(returnStdout: true, script: '''
                 for tag in $(docker images netpass_builder | sed -Ee 's/ +/ /gm' | cut -d" " -f 2 | tail -n +2)
                 do
-                    echo Found: "${tag}"
+                    
                     if [ "${env.version}" = "${tag}" ]; then
                         echo -n false
                         exit 0
