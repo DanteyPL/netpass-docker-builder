@@ -23,7 +23,7 @@ pipeline {
                     done
                     echo -n true
                     ''').trim()}"""
-                    echo "Requires Building: \${requiresBuilding}"
+                    echo "Requires Building: ${requiresBuilding}"
                 }
                 echo "Version: ${version}"
             }
