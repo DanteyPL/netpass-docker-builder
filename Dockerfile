@@ -1,5 +1,5 @@
 FROM debian:12
-LABEL version="0.2.3-alpha"
+LABEL version="0.2.4-alpha"
 LABEL vendor1="DanteyPL"
 ARG DEBIAN_FRONTEND=noninteractive
 # Install required packages to install dkp
@@ -15,11 +15,11 @@ RUN sed -i -e 's/apt-get install/apt-get install -y/' ./install-devkitpro-pacman
 RUN eval ./install-devkitpro-pacman
 RUN ln -s /proc/self/mounts /etc/mtab
 # Installing required SDK for building
-RUN dkp-pacman --noconfirm -S 3ds-dev 3ds-curl
+RUN dkp-pacman --noconfirm -S 3ds-dev 3ds-curl 3ds-libvorbisidec 3ds-opusfile 3ds-pkg-config
 # Exporting required variables to .bashrc to have persistence after reboot of container
-RUN echo "export DEVKITPRO=/opt/devkitpro" >> ~/.bashrc
-RUN echo "export DEVKITARM=/opt/devkitpro/devkitARM" >> ~/.bashrc
-RUN echo "export PATH=$PATH:/opt/devkitpro/devkitARM/bin" >> ~/.bashrc
+RUN echo "export DEVKITPRO=/opt/devkitpro" >> ~/.bashrc \
+    && echo "export DEVKITARM=/opt/devkitpro/devkitARM" >> ~/.bashrc \
+    && echo "export PATH=$PATH:/opt/devkitpro/devkitARM/bin" >> ~/.bashrc 
 # Adding required enviroment variables
 ENV DEVKITPRO /opt/devkitpro
 ENV DEVKITARM /opt/devkitpro/devkitARM
